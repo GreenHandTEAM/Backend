@@ -108,7 +108,7 @@ public class ProductoController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/product/{id_}/{id}")
-	public Producto associate (@PathVariable Integer id_, @PathVariable String id) {
+	public Producto associate (@PathVariable Integer id_, @PathVariable Integer id) {
 		Producto producto = p_repository.findById(id_).get();
 		Material material = m_repository.findById(id).get();
 		
