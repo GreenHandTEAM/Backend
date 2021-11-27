@@ -25,7 +25,6 @@ public class SwaggerConfig {
 				.paths(PathSelectors.any())
 				.build()
 				.apiInfo(greenHandApiInfo())
-				.tags(new Tag("Class: CompraController", "*** Compra Controller ***"))
 				.tags(new Tag("Class: MaterialController", "*** Material Controller ***"))
 				.tags(new Tag("Class: ProductoController", "*** Producto Controller ***"))
 				;
