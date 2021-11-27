@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Producto {
 
 	@Id
-	@Column(name = "id", unique = true)
+	@Column(name="id", unique=true)
 	public Integer id;
 
 	@Column(name = "nombre")
@@ -27,7 +27,6 @@ public class Producto {
 			   joinColumns = { @JoinColumn(name = "fk_producto") }, 
 			   inverseJoinColumns = { @JoinColumn(name = "fk_material") })
 	private Set<Material> materiales;
-
 
 	public Producto() {
 	}
