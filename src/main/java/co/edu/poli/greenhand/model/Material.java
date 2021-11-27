@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -15,8 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Material {
 
 	@Id
-	@Column(name="id", unique=true)
-	public String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	public Integer id;
 
 	@Column(name = "categoria")
 	public String categoria;
@@ -34,23 +36,18 @@ public class Material {
 	public Material() {
 	}
 
-	public Material(String id, String categoria, String nombre, Boolean reciclable, Set<Producto> productos) {
+	public Material(String categoria, String nombre, Boolean reciclable, Set<Producto> productos) {
 		super();
-		this.id = id;
 		this.categoria = categoria;
 		this.nombre = nombre;
 		this.reciclable = reciclable;
 		this.productos = productos;
 	}
 
-	public String getId() {
-		return id;
+	public Integer getId() { 
+		return this.id; 
 	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
+	
 	public String getCategoria() {
 		return categoria;
 	}

@@ -3,6 +3,7 @@ package co.edu.poli.greenhand.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +53,8 @@ public class ProductoController {
 		return producto;
 	}
 	
-	@PostMapping("/product")//SOLO ADMIN
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/product")
 	@ApiOperation(value="*** Service Method Post a product***", notes = "***Post a product to MySQL///WebApp***")
 	@ApiResponses(value= {@ApiResponse(code=404, message="***Error post a product!! no path found***")})
 	public Producto insertProducto(@RequestBody Producto producto) {
@@ -76,14 +78,13 @@ public class ProductoController {
 	}*/
 
 	
-
-	@PutMapping("/product/{id_}")//SOLO ADMIN
+	@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping("/product/{id_}")
 	@ApiOperation(value="*** Service Method Put a product by Id***", notes = "***Put a product by Id to MySQL///WebApp***")
 	@ApiResponses(value= {@ApiResponse(code=404, message="***Error put a store by Id!! no path found***")})
 	public Producto updateProducto(@PathVariable Integer id_, @RequestBody Producto producto) {
 		Producto c_update = p_repository.getById(id_);
 
-		c_update.setId(producto.getId());
 		c_update.setNombre(producto.getNombre());
 		c_update.setMateriales(producto.getMateriales());
 		
@@ -92,7 +93,8 @@ public class ProductoController {
 		return producto;
 	}
 
-	@DeleteMapping("/product/{id_}")//SOLO ADMIN	
+	@PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/product/{id_}")	
 	@ApiOperation(value="*** Service Method Delete a product***", notes = "***Delete a Product to MySQL///WebApp***")
 	@ApiResponses(value= {@ApiResponse(code=404, message="***Error delete a product!! no path found***")})
 	public Producto deleteProducto(@PathVariable Integer id_) {
@@ -102,7 +104,8 @@ public class ProductoController {
 		return productodb;
 	}
 	
-	@PutMapping("/product/{id_}/{id}")//SOLO ADMIN
+	@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping("/product/{id_}/{id}")
 	public Producto associate (@PathVariable Integer id_, @PathVariable String id) {
 		Producto producto = p_repository.findById(id_).get();
 		Material material = m_repository.findById(id).get();

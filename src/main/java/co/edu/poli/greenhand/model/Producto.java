@@ -4,19 +4,20 @@ import java.util.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "productos")
 public class Producto {
 
 	@Id
-	@Column(name="id", unique=true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	public Integer id;
 
 	@Column(name = "nombre")
@@ -31,18 +32,14 @@ public class Producto {
 	public Producto() {
 	}
 
-	public Producto(Integer id, String nombre, Set<Material> materiales) {
-		this.id = id;
+	public Producto(String nombre, Set<Material> materiales) {
+		super();
 		this.nombre = nombre;
 		this.materiales = materiales;
 	}
 
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getNombre() {

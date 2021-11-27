@@ -35,7 +35,7 @@ public class MaterialController {
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping("/material")//SOLO ADMIN
+	@PostMapping("/material")
 	@ApiOperation(value="*** Service Method Post a material***", notes = "***Post a material to MySQL///WebApp***")
 	@ApiResponses(value= {@ApiResponse(code=404, message="***Error post a material!! no path found***")})
 	public Material insertMaterial(@RequestBody Material material) {
@@ -58,7 +58,8 @@ public class MaterialController {
 		return m_repository.findAll();
 	}
 
-	@PutMapping("/material/{id}")//SOLO ADMIN
+	@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping("/material/{id}")
 	@ApiOperation(value="*** Service Method Put materials***", notes = "***Put Materials to MySQL///WebApp***")
 	@ApiResponses(value= {@ApiResponse(code=404, message="***Error put material!! no path found***")})
 	public Material updateMaterial(@PathVariable String id, @RequestBody Material material) {
@@ -73,7 +74,8 @@ public class MaterialController {
 		return m_update;
 	}
 
-	@DeleteMapping("/material/{id}")//SOLO ADMIN
+	@PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/material/{id}")
 	@ApiOperation(value="*** Service Method Delete material***", notes = "***Delete Material to MySQL///WebApp***")
 	@ApiResponses(value= {@ApiResponse(code=404, message="***Error delete material!! no path found***")})
 	public Material deleteMaterial(@PathVariable String id) {
